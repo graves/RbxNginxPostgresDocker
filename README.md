@@ -1,6 +1,6 @@
 # Containerized Rails Development Environment using Docker
 
-A sample Rails environment using 3 seperate Docker containers. Powered by
+A sample Rails environment using three seperate Docker containers. Powered by
 Rubinius, Puma, Nginx and PostgreSQL.
 
 The Dockerfile and scripts for the PostgreSQL container were borrowed from
