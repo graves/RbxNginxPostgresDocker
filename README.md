@@ -15,21 +15,21 @@ the Dockerfile then run the build command.
 
 Build the PostgreSQL image.
 
-...
+```
 $ docker build -t="graves/postgresql" .
-...
+```
 
 Build the Rubinius/Rails image.
 
-...
+```
 $ docker build -t="graves/rbx-rails" .
-...
+```
 
 Build the Nginx image.
 
-...
+```
 $ docker build -t="graves/nginx" .
-...
+```
 
 ## Running the containers
 
@@ -38,14 +38,14 @@ link for [details][postgres-container]
 
 [postgres-container]: https://github.com/graves/RbxNginxPostgresDocker/tree/master/docker-postgresql
 
-...
+```
 $ docker run -d --name="postgresql" \
               -p 127.0.0.1:5432:5432 \
               -v /tmp/postgresql:/data \
               -e USER="docker" \
               -e PASS="$(pwgen -s -1 16)" \
               graves/postgresql
-...
+```
 
 Start your rails application. The SampleApp uses environment variables obtained from
 the linked postgres container to connect to the database. Check out config/database.yml
@@ -54,13 +54,13 @@ of the container during the build process. It uses foreman to create the databas
 migrate, and start the puma server. Be sure to rebuild the server if you make changes
 to the startup script.
 
-...
+```
 docker run --rm -i --name rails \
                     -e RAILS_ENV=development \
                     --link postgresql:db \
                     -v /Users/tg/Projects/sampleapp-docker/SampleApp:/var/www/SampleApp \
                     graves/rbx-rails
-...
+```
 
 The -v option is a shared volume. Change this to match the path to your Rails application.
 Changes made to this directory on the host will be made available in the container without
@@ -72,8 +72,13 @@ a shared volume to allow the Nginx container access to Puma's unix domain socket
 is a startup script in the root of the Nginx container that chmods socket before starting
 Nginx.
 
-er run --rm -i --name nginx \
+```
+docker run --rm -i --name nginx \
                     --volumes-from rails \
                     -p 80:80 \
                     -v /Users/tg/Projects/nginx-docker/var/log/nginx:/var/log/nginx \
                     graves/nginx
+```
+
+I'm on OSX so I use ```$ boot2docker ip``` to get the ip of the docker host and change
+my host file to map it to docker.local.
