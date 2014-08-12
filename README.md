@@ -9,7 +9,7 @@ The Dockerfile and scripts for the PostgreSQL container were borrowed from
 [paintedfox]: https://github.com/Painted-Fox/docker-postgresql
 
 ## Image Creation
-These examples will tag the images 'graves/<image-name>', feel free to modify this
+These examples will tag the images "graves/image-name", feel free to modify this
 in any way you please. For each image first navigate to the directory containing
 the Dockerfile then run the build command.
 
