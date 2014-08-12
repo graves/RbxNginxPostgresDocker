@@ -1,0 +1,16 @@
+default: &default
+  adapter: postgresql
+  host: <%= ENV['DB_PORT_5432_TCP_ADDR'] %>
+  port: <%= ENV['DB_PORT_5432_TCP_PORT'] %>
+  encoding: unicode
+  pool: 5
+  username: <%= ENV['DB_ENV_USER'] %>
+  password: <%= ENV['DB_ENV_PASS'] %>
+
+development:
+  <<: *default
+  database: "docker_development"
+
+test:
+  <<: *default
+  database: "docker_test"
