@@ -3,20 +3,20 @@
 A sample Rails environment using three seperate Docker containers. Powered by
 Rubinius, Puma, Nginx and PostgreSQL.
 
-The Dockerfile and scripts for the PostgreSQL container were borrowed from
-[Painted-Fox/docker-postgresql][paintedfox]
-
-[paintedfox]: https://github.com/Painted-Fox/docker-postgresql
-
 ## Image Creation
 These examples will tag the images "graves/image-name", feel free to modify this
 in any way you please. For each image first navigate to the directory containing
 the Dockerfile then run the build command.
 
-Build the PostgreSQL image.
+Build the PostgreSQL image using a prebuilt image from kamui/postgresql.
 
 ```
-$ docker build -t="graves/postgresql" .
+docker run -p ::5432 \
+--name postgresql \
+-e POSTGRESQL_DB=docker_development \
+-e POSTGRESQL_USER=docker \
+-e POSTGRESQL_PASS=docker \
+kamui/postgresql
 ```
 
 Build the Rubinius/Rails image.
