@@ -4,12 +4,12 @@ default: &default
   port: <%= ENV['DB_PORT_5432_TCP_PORT'] %>
   encoding: unicode
   pool: 5
-  username: <%= ENV['DB_ENV_USER'] %>
-  password: <%= ENV['DB_ENV_PASS'] %>
+  username: <%= ENV['DB_ENV_POSTGRESQL_USER'] %>
+  password: <%= ENV['DB_ENV_POSTGRESQL_PASS'] %>
 
 development:
   <<: *default
-  database: "docker_development"
+  database: <%= ENV['DB_ENV_POSTGRESQL_DB'] %>
 
 test:
   <<: *default
