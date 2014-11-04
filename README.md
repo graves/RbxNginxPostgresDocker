@@ -8,17 +8,6 @@ These examples will tag the images "graves/image-name", feel free to modify this
 in any way you please. For each image first navigate to the directory containing
 the Dockerfile then run the build command.
 
-Build the PostgreSQL image using a prebuilt image from kamui/postgresql.
-
-```
-docker run -p ::5432 \
---name postgresql \
--e POSTGRESQL_DB=docker_development \
--e POSTGRESQL_USER=docker \
--e POSTGRESQL_PASS=docker \
-kamui/postgresql
-```
-
 Build the Rubinius/Rails image.
 
 ```
@@ -36,15 +25,15 @@ $ docker build -t="graves/nginx" .
 Start the PostgreSQL server first with your desired options. Click the following
 link for [details][postgres-container]
 
-[postgres-container]: https://github.com/graves/RbxNginxPostgresDocker/tree/master/docker-postgresql
+[postgres-container]: https://github.com/kamui/docker-postgresql
 
 ```
-$ docker run -d --name="postgresql" \
-              -p 127.0.0.1:5432:5432 \
-              -v /tmp/postgresql:/data \
-              -e USER="docker" \
-              -e PASS="$(pwgen -s -1 16)" \
-              graves/postgresql
+$ docker run -p ::5432 \
+--name postgresql \
+-e POSTGRESQL_DB=docker_development \
+-e POSTGRESQL_USER=docker \
+-e POSTGRESQL_PASS=docker \
+kamui/postgresql
 ```
 
 Start your rails application. The SampleApp uses environment variables obtained from
